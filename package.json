@@ -1,0 +1,24 @@
+{
+  "name": "amazon-bot-alexhm",
+  "version": "1.0.0",
+  "description": "An Amazon bot to check prices of a desire product.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexhmdev/amazon-price-bot.git"
+  },
+  "author": "Alejandro Herrera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexhmdev/amazon-price-bot/issues"
+  },
+  "homepage": "https://github.com/alexhmdev/amazon-price-bot#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
