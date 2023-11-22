@@ -1,17 +1,21 @@
-import axios from 'axios';
-import * as cheerio from 'cheerio';
+import { getPrice } from './src/scrapper.js';
+import { intro, outro, text, spinner } from '@clack/prompts';
 
-const url =
-  'https://www.amazon.com.mx/nuevo-fire-tv-stick-4k-con-control-remoto-por-voz-alexa/dp/B0872Y93TV/ref=p13n_ds_purchase_sim_1p_dp_desktop_sccl_1_3/134-8079882-1364640?pd_rd_w=EhNnp&content-id=amzn1.sym.7067b2fd-07b4-4829-806a-9722a872c3c9&pf_rd_p=7067b2fd-07b4-4829-806a-9722a872c3c9&pf_rd_r=XS3NG5VFQ3Y0EJMXGGJG&pd_rd_wg=l3v4U&pd_rd_r=4aff2433-8967-4d9a-bf37-3c873de8612d&pd_rd_i=B0872Y93TV&psc=1';
-try {
-  const response = await axios.get(url);
-  // console.log(response.data);
-  const $ = cheerio.load(response.data);
-  const price = $('.a-price-whole').text();
-  const priceValue = price.split('.', 1);
-  console.log('El precio es: ', priceValue[0]);
-} catch (error) {
-  console.log(error);
-}
+const s = spinner();
 
-// TODO: Cargar nuestra pagina con cheerio -> obtener datos necesarios
+intro('Welcome to Amazon price bot!');
+
+const url = await text({
+  message: 'Type or paste your Amazon URL:',
+  placeholder: 'https://www.amazon.com.mx/dp/B09CGB6VRR',
+  validate: (value) => {
+    if (!value.includes('www.amazon.com.mx')) return 'Invalid Amazon URL';
+  },
+});
+s.start('Getting price...');
+const price = await getPrice(url);
+s.stop(price);
+// getPrice(
+//   'https://www.amazon.com.mx/dp/B0C58B4KLD/ref=sspa_dk_detail_5?psc=1&pd_rd_i=B0C58B4KLD&pd_rd_w=e5QoQ&content-id=amzn1.sym.f9db214f-45b5-4f3b-8f3e-c2b60dfd9e46&pf_rd_p=f9db214f-45b5-4f3b-8f3e-c2b60dfd9e46&pf_rd_r=PPMHRXFW60DS9HQWQ9KW&pd_rd_wg=sPzrr&pd_rd_r=d5214505-1b65-4ff2-9cb9-6cd6d1bc004e&s=electronics&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw'
+// );
+outro('Thanks for using my app!');
