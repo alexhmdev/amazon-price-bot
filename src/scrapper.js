@@ -8,7 +8,7 @@ async function getPrice(url) {
     const $ = cheerio.load(response.data);
     const price = $('.a-price-whole').text();
     const priceValue = price.split('.', 1);
-    return 'El precio es: ' + priceValue[0];
+    return 'The price is: ' + priceValue[0];
   } catch (error) {
     console.log(error);
   }

@@ -26,5 +26,8 @@
     "@clack/prompts": "^0.7.0",
     "axios": "^1.6.1",
     "cheerio": "^1.0.0-rc.12"
+  },
+  "bin": {
+    "amazon-bot-alexhm": "./bin/global.js"
   }
 }
